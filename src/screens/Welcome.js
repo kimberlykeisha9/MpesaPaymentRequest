@@ -6,7 +6,7 @@ import { styles } from '../utils/Style'
 import { getData, storeData } from '../utils/Functions'
 import TextButton from '../components/TextButton'
 
-export default function Welcome({ navigator }) {
+export default function Welcome({ navigation }) {
   const [name, setName] = useState('')
   useEffect(() => {
     const retrieveData = async () => {
@@ -23,7 +23,7 @@ export default function Welcome({ navigator }) {
   const { container, title, text, padding, input, skipButton } = styles
   const handleContinue = () => {
     storeData('name', name)
-    navigator.navigate('Transaction Loader')
+    navigation.navigate('Transaction Loader')
   }
   return (
     <View style={[container, padding]}>
