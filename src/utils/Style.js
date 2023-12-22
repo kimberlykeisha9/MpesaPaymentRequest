@@ -3,14 +3,32 @@ import { StyleSheet } from 'react-native'
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    maxWidth: 500,
     backgroundColor: 'white',
     alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center'
+  },
+  dialogStyle: {
+    padding: 20,
+    maxWidth: 500,
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderWidth: 1,
   },
   skipButton: {
     position: 'absolute',
     top: 60,
     right: 20
+  },
+  listItem: {
+    padding: 20,
+    width: '100%',
+    borderColor: 'black',
+    borderWidth: 1,
+    marginVertical: 10,
+    alignItems: 'center'
   },
   button: {
     alignItems: 'center',
@@ -22,7 +40,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     letterSpacing: 0.25,
     color: 'white'
@@ -39,9 +57,9 @@ export const styles = StyleSheet.create({
     textAlign: 'center'
   },
   input: {
-    fontSize: 20,
+    fontSize: 16,
     borderColor: 'black',
-    borderWidth: 2,
+    borderWidth: 1,
     width: '100%',
     height: 60,
     paddingHorizontal: 20

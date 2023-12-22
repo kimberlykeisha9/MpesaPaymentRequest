@@ -1,19 +1,18 @@
 import { StatusBar } from 'expo-status-bar'
-import { Text, View, TextInput, Pressable } from 'react-native'
+import { Text, View, TextInput } from 'react-native'
 import CustomButton from '../components/CustomButton'
 import React, { useState, useEffect } from 'react'
 import { styles } from '../utils/Style'
 import { getData, storeData } from '../utils/Functions'
+import TextButton from '../components/TextButton'
 
-export default function Welcome() {
-  const [name, onChangeName] = useState('')
-  const [fetchedName, setFetchedName] = useState('')
+export default function Welcome({ navigator }) {
+  const [name, setName] = useState('')
   useEffect(() => {
     const retrieveData = async () => {
       try {
         const storedName = await getData('name')
-        onChangeName(storedName !== null ? storedName : '')
-        setFetchedName(storedName !== null ? storedName : '')
+        setName(storedName !== null ? storedName : '')
       } catch (error) {
         console.error('Error retrieving data:', error)
       }
@@ -22,11 +21,15 @@ export default function Welcome() {
     retrieveData()
   }, [])
   const { container, title, text, padding, input, skipButton } = styles
+  const handleContinue = () => {
+    storeData('name', name)
+    navigator.navigate('Transaction Loader')
+  }
   return (
     <View style={[container, padding]}>
       <StatusBar style="auto" />
-      
-      <Text style={title}>Hello {fetchedName}</Text>
+      <TextButton style={skipButton} text="SKIP" />
+      <Text style={title}>Hello User</Text>
       <View style={{ marginTop: 20 }} />
       <Text style={text}>
         Welcome to my application that handles M-Pesa transactions
@@ -37,11 +40,11 @@ export default function Welcome() {
       <TextInput
         style={input}
         placeholder="First name"
-        onChangeText={onChangeName}
+        onChangeText={setName}
         value={name}
       />
       <View style={{ marginTop: 50 }} />
-      <CustomButton title="CONTINUE" onPress={() => storeData('name', name)} />
+      <CustomButton title="CONTINUE" onPress={handleContinue} />
     </View>
   )
 }
